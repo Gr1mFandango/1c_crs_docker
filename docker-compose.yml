@@ -1,0 +1,22 @@
+services:
+
+  repo:
+      image: onec-crs:${ONEC_VERSION}
+      container_name: onec-crs
+      build:
+        context: .
+        dockerfile: Dockerfile
+        args:
+          ONEC_USERNAME: ${ONEC_USERNAME}
+          ONEC_PASSWORD: ${ONEC_PASSWORD}
+          ONEC_VERSION:  ${ONEC_VERSION}
+      ports:
+        - "${CRS_PORT}:1542"
+      volumes:
+        - ${REPO_PATH}:/home/usr1cv8/.1cv8
+      restart: always
+      environment:
+        - CRS_PORT=${CRS_PORT}
+        - ONEC_VERSION=${ONEC_VERSION}
+      tty: true
+      stdin_open: true
